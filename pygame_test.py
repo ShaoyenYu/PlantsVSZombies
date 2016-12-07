@@ -10,17 +10,21 @@ delta_y = 0
 
 resolution = (display_width, display_height)
 black, white, red = (0, 0, 0), (255, 255, 255), (255, 0, 0)
-img_zombie = pg.image.load("ConeheadZombieAttack.gif")
-img_sunflower = pg.image.load("images_sunflower.png")
+img_zombie = pg.image.load("src/ConeheadZombieAttack.gif")
+img_sunflower = pg.image.load("src/images_sunflower.png")
+img_icon = pg.image.load("src/icon.png")
 
-gameDisplay = pg.display.set_mode(resolution)
 
+# DISPLAY
 
+window = pg.display.set_mode((0, 0), pg.RESIZABLE)
+pg.display.set_caption("Plants v.s Zombie(DEV)")
+pg.display.set_icon(img_icon)
+
+# Surface
 def image_display(img, x, y):
-    gameDisplay.blit(img, (x, y))
+    window.blit(img, (x, y))
 
-
-pg.display.set_caption("A test program")
 
 clock = pg.time.Clock()
 
@@ -45,6 +49,10 @@ while not crashed:
             if event.key in (pg.K_DOWN, pg.K_s):
                 key_down["DOWN"] = True
                 delta_y = 5
+            if event.key == pg.K_1:
+                pg.transform.scale(img_sunflower, (10, 10))
+                print(pg.Surface.get_size(window), pg.display.get_surface().get_height())
+
         if event.type == pg.KEYUP:
             if event.key in (pg.K_LEFT, pg.K_a):
                 key_down["LEFT"] = False
@@ -75,16 +83,22 @@ while not crashed:
                 pg.quit()
                 quit()
 
-    print(event)
+        if event.type == pg.VIDEORESIZE:
+            print(event.size)
+
+
+    # print(event)
 
     x += delta_x
     y += delta_y
 
-    gameDisplay.fill(white)
+    window.fill(white)
     image_display(img_sunflower, 10, 10)
     image_display(img_zombie, x, y)
 
     pg.display.update()  # pg.display.flip()
     clock.tick(60)
+
+
 
 pg.quit()
