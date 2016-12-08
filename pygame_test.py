@@ -1,41 +1,49 @@
 import pygame as pg
 
 pg.init()
-
-display_height = 384 * 1
-display_width = 512 * 1
+scale_ratio_x, scale_ratio_y = 2, 2
+display_width = 512 * scale_ratio_x
+display_height = 384 * scale_ratio_y
 x, y = display_width * .5, display_height * .5
 delta_x = 0
 delta_y = 0
 
 resolution = (display_width, display_height)
 black, white, red = (0, 0, 0), (255, 255, 255), (255, 0, 0)
-img_zombie = pg.image.load("src/ConeheadZombieAttack.gif")
-img_sunflower = pg.image.load("src/images_sunflower.png")
+img_coneheadzombie = pg.image.load("src/zombies/ConeheadZombieAttack.gif")
+
+img_zombie = pg.image.load("src/zombies/Zombie.gif")
+img_bucketheadzombie = pg.image.load("src/zombies/BucketheadZombie.gif")
+img_sunshinezombie = pg.image.load("src/zombies/SunshineZombie.gif")
+img_rj = pg.transform.scale(pg.image.load("src/plantscard/RjFlower.png"), (100, 120))
+img_sunflower = pg.transform.scale(pg.image.load("src/plantscard/TwinsSunflower.png"), (100, 120))
+
 img_icon = pg.image.load("src/icon.png")
+img_grass = pg.image.load("src/background/grass.png")
 
 
-# DISPLAY
-
-window = pg.display.set_mode((0, 0), pg.RESIZABLE)
-pg.display.set_caption("Plants v.s Zombie(DEV)")
-pg.display.set_icon(img_icon)
-
+# pg.transform()
 # Surface
 def image_display(img, x, y):
     window.blit(img, (x, y))
 
 
+# DISPLAY
+
+window = pg.display.set_mode(resolution, pg.RESIZABLE)
+pg.display.set_caption("Plants v.s Zombie(DEV)")
+pg.display.set_icon(img_icon)
+
 clock = pg.time.Clock()
 
-crashed = False
+gameover = False
 
 key_down = {k: False for k in ["LEFT", "RIGHT", "UP", "DOWN"]}
 
-while not crashed:
+while not gameover:
     for event in pg.event.get():
         if event.type == pg.QUIT:
-            crashed = True
+            gameover = True
         if event.type == pg.KEYDOWN:
             if event.key in (pg.K_LEFT, pg.K_a):
                 key_down["LEFT"] = True
@@ -86,19 +94,19 @@ while not crashed:
         if event.type == pg.VIDEORESIZE:
             print(event.size)
 
-
     # print(event)
 
     x += delta_x
     y += delta_y
 
     window.fill(white)
-    image_display(img_sunflower, 10, 10)
+    image_display(img_grass, 0, 0)
+    image_display(img_sunflower, 60, 30)
+    image_display(img_rj, 60, 150)
     image_display(img_zombie, x, y)
-
+    image_display(img_bucketheadzombie, x + 100, y + 135)
+    image_display(img_sunshinezombie, x + 150, y + 270)
     pg.display.update()  # pg.display.flip()
     clock.tick(60)
-
-
 
 pg.quit()
