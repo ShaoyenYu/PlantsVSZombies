@@ -1,4 +1,5 @@
 import pygame as pg
+from utils import animation
 
 pg.init()
 scale_ratio_x, scale_ratio_y = 2, 2
@@ -12,7 +13,8 @@ resolution = (display_width, display_height)
 black, white, red = (0, 0, 0), (255, 255, 255), (255, 0, 0)
 img_coneheadzombie = pg.image.load("src/zombies/ConeheadZombieAttack.gif")
 
-img_zombie = pg.image.load("src/zombies/Zombie.gif")
+# img_zombie = pg.image.load("src/zombies/Zombie.gif")
+img_zombie = animation.SunFlower()
 img_bucketheadzombie = pg.image.load("src/zombies/BucketheadZombie.gif")
 img_sunshinezombie = pg.image.load("src/zombies/SunshineZombie.gif")
 img_rj = pg.transform.scale(pg.image.load("src/plantscard/RjFlower.png"), (100, 120))
@@ -26,7 +28,6 @@ img_grass = pg.image.load("src/background/grass.png")
 # Surface
 def image_display(img, x, y):
     window.blit(img, (x, y))
-
 
 # DISPLAY
 
