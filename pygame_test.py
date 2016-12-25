@@ -14,7 +14,7 @@ black, white, red = (0, 0, 0), (255, 255, 255), (255, 0, 0)
 img_coneheadzombie = pg.image.load("src/zombies/ConeheadZombieAttack.gif")
 
 # img_zombie = pg.image.load("src/zombies/Zombie.gif")
-img_zombie = animation.load_image()
+img_zombie = animation.SunFlower()
 img_bucketheadzombie = pg.image.load("src/zombies/BucketheadZombie.gif")
 img_sunshinezombie = pg.image.load("src/zombies/SunshineZombie.gif")
 img_rj = pg.transform.scale(pg.image.load("src/plantscard/RjFlower.png"), (100, 120))
